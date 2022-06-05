@@ -131,6 +131,33 @@ services:
     ports:
       - "5601:5601"
 
+  enterprisesearch:
+    image: docker.elastic.co/enterprise-search/enterprise-search:${ELK_VERSION}
+    volumes:
+      - ./secrets/certs:/usr/share/enterprise-search/config/certs
+      - ./enterprisesearch/config/enterprise-search.yml:/usr/share/enterprise-search/config/enterprise-search.yml
+    ports:
+      - 3002:3002
+    environment:
+      SERVERNAME: enterprisesearch
+      ENCRYPTION_KEYS: ${ENCRYPTION_KEYS}
+      ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ELASTICSEARCH_HOST_PORT: https://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+      KIBANA_EXTERNAL_URL: https://${KIBANA_HOST}:${KIBANA_PORT}
+      CERTIFICATE_AUTHORITIES: /usr/share/enterprise-search/config/certs/ca/ca.crt
+      JAVA_OPTS: "-Xms2g -Xmx2g"
+    mem_limit: ${MEM_LIMIT}
+    healthcheck:
+      test:
+        [
+            "CMD-SHELL",
+            "curl -s -I http://localhost:3002 | grep -q 'HTTP/1.1 302 Found'",
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 120
+
   fleet-server:
     image: docker.elastic.co/beats/elastic-agent:${ELK_VERSION}
     container_name: fleet-server

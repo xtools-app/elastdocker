@@ -33,3 +33,7 @@ xpack.security.http.ssl.client_authentication: optional
 
 # Monitoring
 xpack.monitoring.collection.enabled: true
+
+
+# Enterprise Search
+action.auto_create_index: ".ent-search-*-logs-*,-.ent-search-*,-test-.ent-search-*,+*"

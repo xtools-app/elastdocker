@@ -30,3 +30,8 @@ elasticsearch.requestTimeout: 90000
 ## ElastAlert Plugin
 #elastalert-kibana-plugin.serverHost: elastalert
 #elastalert-kibana-plugin.serverPort: 3030
+
+
+
+# Enterprisesearch
+enterpriseSearch.host: 'http://enterprisesearch:3002'

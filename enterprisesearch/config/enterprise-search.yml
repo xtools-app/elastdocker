@@ -1,0 +1,15 @@
+allow_es_settings_modification: true
+audit_log_directory: /var/log/enterprise-search
+elasticsearch.host: ${ELASTICSEARCH_HOST_PORT}
+elasticsearch.password: ${ELASTIC_PASSWORD}
+elasticsearch.ssl.certificate_authority: ${CERTIFICATE_AUTHORITIES}
+elasticsearch.ssl.enabled: true
+elasticsearch.username: ${ELASTIC_USERNAME}
+ent_search.listen_host: 0.0.0.0
+filebeat_log_directory: /var/log/enterprise-search
+kibana.external_url: ${KIBANA_EXTERNAL_URL}
+log_directory: /var/log/enterprise-search
+metricbeat_log_directory: /var/log/enterprise-search
+secret_management.encryption_keys: ['${ENCRYPTION_KEYS}']
+crawler.crawl.max_crawl_depth.limit: 2
+crawler.crawl.threads.limit: 2
